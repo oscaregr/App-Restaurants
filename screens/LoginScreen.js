@@ -8,13 +8,11 @@ import {
   Button as RNButton,
   Image,
 } from "react-native";
-import logo from "../assets/appRestaurante.png";
 
 import { Button, InputField, ErrorMessage } from "../components";
 import Firebase from "../config/firebase";
 
 const auth = Firebase.auth();
-
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -48,10 +46,19 @@ export default function LoginScreen({ navigation }) {
       <Text style={styles.title}>Iniciar sesión</Text>
       <View style={styles.imgContainer}>
         <Image
-          style={styles.tinyLogo}
-          source={{
-            uri: logo,
+          style={{
+            width: 150,
+            height: 150,
+            shadowColor: "#000",
+            shadowOffset: {
+              width: 0,
+              height: 2,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+            // elevation: 5,
           }}
+          source={require("../assets/appRestaurante50.png")}
         />
       </View>
       <InputField
@@ -145,12 +152,11 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
     elevation: 5,
   },
   imgContainer: {
     justifyContent: "center",
     alignItems: "center",
-    margin: "16px",
+    margin: 16,
   },
 });
