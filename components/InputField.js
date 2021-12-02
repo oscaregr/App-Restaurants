@@ -10,6 +10,7 @@ const InputField = ({
   containerStyle,
   placeholderTextColor = '#444',
   handlePasswordVisibility,
+  userIcon,
   ...rest
 }) => {
   return (

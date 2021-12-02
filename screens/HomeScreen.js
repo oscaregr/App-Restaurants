@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useContext } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
+
 
 import { IconButton } from '../components';
 import Firebase from '../config/firebase';
@@ -8,7 +9,7 @@ import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvide
 
 const auth = Firebase.auth();
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   const { user } = useContext(AuthenticatedUserContext);
   const handleSignOut = async () => {
     try {
@@ -21,14 +22,24 @@ export default function HomeScreen() {
     <View style={styles.container}>
       <StatusBar style='dark-content' />
       <View style={styles.row}>
-        <Text style={styles.title}>Bienvenido {"\n"}{user.email}, {"\n"}inicio correctamente!</Text>
         <IconButton
           name='logout'
           size={24}
           color='#fff'
           onPress={handleSignOut}
         />
+        
       </View>
+      <Button
+        onPress={() => navigation.navigate('Foot')}
+        backgroundColor='#467fd0'
+        title='crear negocio'
+        tileColor='#fff'
+        titleSize={20}
+        containerStyle={{
+          marginBottom: 24
+        }}
+      />
       <Text style={styles.text}>Tú id de usuario es: {user.uid} </Text>
     </View>
   );
