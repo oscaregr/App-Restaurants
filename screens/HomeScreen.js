@@ -63,7 +63,7 @@ export default function HomeScreen({ navigation }) {
           marginBottom: 24,
         }}
       />
-      <Text style={styles.text}>Tú id de usuario es: {user.uid} </Text>
+      <Text style={styles.text}>Tú id de usuario es: {user.uid}</Text>
       {restaurants.map((rest) => (
         <Button
           key={rest.id}
