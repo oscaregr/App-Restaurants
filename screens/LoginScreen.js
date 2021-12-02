@@ -74,7 +74,7 @@ export default function LoginScreen({ navigation }) {
         autoCapitalize="none"
         keyboardType="email-address"
         textContentType="emailAddress"
-        autoFocus={true}
+        autoFocus={false}
         value={email}
         onChangeText={(text) => setEmail(text)}
       />
@@ -112,17 +112,6 @@ export default function LoginScreen({ navigation }) {
         onPress={() => navigation.navigate("Signup")}
         title="Registrarse"
         color="#99681d"
-      />
-
-<Button
-        onPress={() => navigation.navigate("AddMenu")}
-        backgroundColor="#7CA0E7"
-        title="Añadir platillos"
-        tileColor="#fff"
-        titleSize={20}
-        containerStyle={{
-          marginBottom: 24,
-        }}
       />
       
     </View>

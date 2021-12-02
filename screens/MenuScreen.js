@@ -19,30 +19,48 @@ const auth = Firebase.auth();
 
 export default function MenuScreen({ navigation }) {
   const { selectedRestaurant } = useContext(AuthenticatedUserContext);
+  const [nombrePlatillo, setNombrePlatillo] = useState("");
+  const [descPlatillo, setDescPlatillo] = useState("");
+  const [precio, setPrecio] = useState("");
+  const [idRestaurante, setIdRestaurante] = useState("");
 
   console.log(selectedRestaurant);
   const [platillos, setPlatillos] = useState([]);
 
-  useEffect(() => {
+  useEffect(async () => {
     db.collection("Menu").onSnapshot((querySnapshot) => {
       const platillos = [];
       querySnapshot.docs.forEach((doc) => {
-        const { descPlatillo, nombrePlatillo, precio } = doc.data();
+        const { descPlatillo, nombrePlatillo, precio, idRestaurante } =
+          doc.data();
         platillos.push({
           id: doc.id,
           descPlatillo,
           nombrePlatillo,
           precio,
+          idRestaurante,
         });
       });
       setPlatillos(platillos);
     });
+    setIdRestaurante(selectedRestaurant.idRestaurante);
   }, []);
 
+  const addAMenu = () => {
+    Firebase.firestore().collection("Menu").add({
+      nombrePlatillo: nombrePlatillo,
+      descPlatillo: descPlatillo,
+      precio: precio,
+      idRestaurante: idRestaurante,
+    });
+    setNombrePlatillo("");
+    setDescPlatillo("");
+    setPrecio("");
+  };
+
   return (
-    <View style={styles.container}>
-      <StatusBar style="dark-content" />
-      <Text style={styles.title}>Agregar a menú</Text>
+    <ScrollView style={styles.container}>
+      <View></View>
       {/* <Button
         onPress={() => navigation.goBack()}
         backgroundColor="#467fd0"
@@ -55,7 +73,7 @@ export default function MenuScreen({ navigation }) {
       /> */}
 
       <View>
-        <InputField
+        {/* <InputField
           inputStyle={{
             fontSize: 14,
           }}
@@ -84,8 +102,72 @@ export default function MenuScreen({ navigation }) {
           autoFocus={true}
           // value={restaurant}
           // onChangeText={(text) => setRestaurant(text)}
+        /> */}
+
+        {/* <StatusBar style="dark-content" /> */}
+        <Text style={styles.title}>
+          Añadir platillo a menu de: {selectedRestaurant.nombre}
+        </Text>
+
+        <InputField
+          inputStyle={{
+            fontSize: 14,
+          }}
+          containerStyle={{
+            backgroundColor: "#fff",
+            marginBottom: 20,
+          }}
+          leftIcon="silverware-fork-knife"
+          placeholder="Nombre del platillo"
+          autoCapitalize="none"
+          autoFocus={true}
+          value={nombrePlatillo}
+          onChangeText={(text) => setNombrePlatillo(text)}
         />
+        <InputField
+          inputStyle={{
+            fontSize: 14,
+          }}
+          containerStyle={{
+            backgroundColor: "#fff",
+            marginBottom: 20,
+          }}
+          leftIcon="silverware"
+          placeholder="Descripción del platillo"
+          autoCapitalize="none"
+          autoCorrect={true}
+          value={descPlatillo}
+          onChangeText={(text) => setDescPlatillo(text)}
+        />
+
+        <InputField
+          inputStyle={{
+            fontSize: 14,
+          }}
+          containerStyle={{
+            backgroundColor: "#fff",
+            marginBottom: 20,
+          }}
+          leftIcon="currency-usd"
+          placeholder="Precio"
+          autoCapitalize="none"
+          autoCorrect={true}
+          value={precio}
+          onChangeText={(text) => setPrecio(text)}
+        />
+
         <Button
+          onPress={addAMenu}
+          backgroundColor="#467fd0"
+          title="Añadir"
+          tileColor="#fff"
+          titleSize={20}
+          containerStyle={{
+            marginBottom: 24,
+          }}
+        />
+
+        {/* <Button
           onPress={() => navigation.navigate("Foot")}
           backgroundColor="#467fd0"
           title="Agregar"
@@ -94,27 +176,42 @@ export default function MenuScreen({ navigation }) {
           containerStyle={{
             marginBottom: 24,
           }}
-        />
+        /> */}
       </View>
       <View style={styles.platillosContainer}>
-        <Text style={styles.headers}>Platillo</Text>
-        <Text style={styles.headers}>Descripción</Text>
+        <View style={{ width: "33%", alignItems: "center" }}>
+          <Text style={styles.headers}>Platillo</Text>
+        </View>
+        <View style={{ width: "33%", alignItems: "center" }}>
+          <Text style={styles.headers}>Descripción</Text>
+        </View>
+        <View style={{ width: "33%", alignItems: "center" }}>
+          <Text style={styles.headers}>Precio</Text>
+        </View>
+
         {/* <Text>{rest.precio}</Text> */}
       </View>
       <ScrollView>
         {platillos.map((rest) => (
-          <View key={rest.id} style={styles.cardPlatillo}>
-            <View style={{ width: "50%", alignItems: "center" }}>
-              <Text style={styles.textCard}>{rest.nombrePlatillo}</Text>
-            </View>
-            <View style={{ width: "50%", alignItems: "center"  }}>
-              <Text style={styles.textCard}>{rest.descPlatillo}</Text>
-            </View>
+          <View key={rest.id}>
+            {rest.idRestaurante === selectedRestaurant.idRestaurante ? (
+              <View style={styles.cardPlatillo}>
+                <View style={{ width: "33%", alignItems: "center" }}>
+                  <Text style={styles.textCard}>{rest.nombrePlatillo}</Text>
+                </View>
+                <View style={{ width: "33%", alignItems: "center" }}>
+                  <Text style={styles.textCard}>{rest.descPlatillo}</Text>
+                </View>
+                <View style={{ width: "33%", alignItems: "center" }}>
+                  <Text style={styles.textCard}>${rest.precio}</Text>
+                </View>
+              </View>
+            ) : null}
             {/* <Text>{rest.precio}</Text> */}
           </View>
         ))}
       </ScrollView>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -157,7 +254,7 @@ const styles = StyleSheet.create({
   },
   headers: {
     color: "#ffffff",
-    fontSize: 20,
+    fontSize: 16,
   },
   textCard: {
     color: "#000000",
@@ -173,6 +270,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     height: 48,
     alignItems: "center",
-    marginTop:8
+    marginTop: 8,
   },
 });
