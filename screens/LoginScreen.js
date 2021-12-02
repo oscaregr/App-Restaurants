@@ -74,7 +74,7 @@ export default function LoginScreen({ navigation }) {
         autoCapitalize="none"
         keyboardType="email-address"
         textContentType="emailAddress"
-        autoFocus={true}
+        autoFocus={false}
         value={email}
         onChangeText={(text) => setEmail(text)}
       />
@@ -113,6 +113,7 @@ export default function LoginScreen({ navigation }) {
         title="Registrarse"
         color="#99681d"
       />
+      
     </View>
   );
 }

@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useContext, useEffect, useState } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, Button, ScrollView } from "react-native";
 
 import { IconButton } from "../components";
 import Firebase from "../config/firebase";
@@ -10,7 +10,7 @@ import { db } from "../config/firebase";
 const auth = Firebase.auth();
 
 export default function HomeScreen({ navigation }) {
-  const { user } = useContext(AuthenticatedUserContext);
+  const { setSelectedRestaurant } = useContext(AuthenticatedUserContext);
 
   const [restaurants, setRestaurants] = useState([]);
 
@@ -20,12 +20,12 @@ export default function HomeScreen({ navigation }) {
       querySnapshot.docs.forEach((doc) => {
         const { direccion, nombre, rfc, tipo, uid } = doc.data();
         restaurants.push({
-          id: doc.id,
+          idRestaurante: doc.id,
           direccion,
           nombre,
           rfc,
           tipo,
-          uid
+          uid,
         });
       });
 
@@ -43,8 +43,10 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <ScrollView style={styles.container}>
-      <StatusBar style='dark-content' />
+      <StatusBar style="dark-content" />
+
       <View style={styles.row}>
+        <Text style={styles.title}>Lista de restaurantes</Text>
         <IconButton
           name="logout"
           size={24}
@@ -52,31 +54,36 @@ export default function HomeScreen({ navigation }) {
           onPress={handleSignOut}
         />
       </View>
-      <Button
-        onPress={() => navigation.navigate("Foot")}
-        backgroundColor="#467fd0"
-        title="Agregar restaurante"
-        tileColor="#fff"
-        titleSize={20}
-        containerStyle={{
-          marginBottom: 24,
-        }}
-      />
-      {restaurants.map((rest) => (
+      <View style={styles.restaurantButton}>
         <Button
-          key={rest.id}
-          onPress={() => navigation.navigate("Menu")}
-          title={rest.nombre}
+          onPress={() => navigation.navigate("Foot")}
+          backgroundColor="#3b6e58"
+          title="Agregar restaurante"
+          tileColor="#fff"
+          titleSize={20}
         />
+      </View>
+
+      {restaurants.map((rest) => (
+        <View key={rest.idRestaurante} style={styles.restaurantButton}>
+          <Button
+            onPress={() => {
+              navigation.navigate("Menu"), setSelectedRestaurant(rest);
+            }}
+            color="#99681d"
+            //467fd0
+            title={rest.nombre}
+          />
+        </View>
       ))}
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#e93b81",
+    backgroundColor: "#ed9209",
     paddingTop: 50,
     paddingHorizontal: 12,
   },
@@ -95,5 +102,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "normal",
     color: "#fff",
+  },
+  restaurantButton: {
+    marginTop: 4,
+    marginBottom: 4,
+    backgroundColor: "#99681d",
   },
 });
