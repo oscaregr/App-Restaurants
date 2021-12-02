@@ -115,7 +115,7 @@ export default function FootupScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#42ba96',
+    backgroundColor: '#c83609',
     paddingTop: 50,
     paddingHorizontal: 12
   },

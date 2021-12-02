@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useContext } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
+import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
+import { ListItem, Avatar } from 'react-native-elements'
 
 
 import { IconButton } from '../components';
@@ -18,8 +19,30 @@ export default function HomeScreen({ navigation }) {
       console.log(error);
     }
   };
+
+  const [restaurants, setRestaurants] = useState([])
+
+  useEffect(() => {
+    Firebase.firestore().collection('Restaurantes').onSnapshot(querySnapshot => {
+
+      const restaurants = [];
+
+      querySnapshot.docs.forEach(doc => {
+        const { direccion, nombre, rfc, tipo } = doc.data()
+        restaurants.push({
+          direccion,
+          nombre,
+          rfc,
+          tipo
+        })
+      });
+
+      setRestaurants(restaurants)
+    });
+  }, []);
+
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <StatusBar style='dark-content' />
       <View style={styles.row}>
         <IconButton
@@ -40,8 +63,15 @@ export default function HomeScreen({ navigation }) {
           marginBottom: 24
         }}
       />
-      <Text style={styles.text}>Tú id de usuario es: {user.uid} </Text>
-    </View>
+
+      {
+        restaurants.map(restaurant => {
+          return (
+
+          )
+        })
+      }
+    </ScrollView>
   );
 }
 
