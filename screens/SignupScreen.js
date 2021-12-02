@@ -15,7 +15,7 @@ import Firebase from "../config/firebase";
 import { db } from "../config/firebase";
 
 const auth = Firebase.auth();
-console.log(db);
+
 
 export default function SignupScreen({ navigation }) {
   const [name, setName] = useState("");
