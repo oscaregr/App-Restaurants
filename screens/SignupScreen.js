@@ -15,7 +15,6 @@ import Firebase from "../config/firebase";
 import { db } from "../config/firebase";
 
 const auth = Firebase.auth();
-console.log(db);
 
 export default function SignupScreen({ navigation }) {
   const [name, setName] = useState("");
@@ -62,15 +61,24 @@ export default function SignupScreen({ navigation }) {
   };
 
   const onHandleSignup = async () => {
-    console.log(name, phoneNumber, text, email, password);
-    auth.createUserWithEmailAndPassword(email, password).then((cred) => {
-      db.collection("users").doc(cred.user.uid).set({
-        name: name,
-        phoneNumber: phoneNumber,
-        email: email,
-        date: date,
+    if (
+      email.length > 0 &&
+      password.length > 0 &&
+      name.length > 0 &&
+      phoneNumber.length > 0 &&
+      text.length > 0
+    ) {
+      auth.createUserWithEmailAndPassword(email, password).then((cred) => {
+        db.collection("users").doc(cred.user.uid).set({
+          name: name,
+          phoneNumber: phoneNumber,
+          email: email,
+          birthdate: text,
+        });
       });
-    });
+    }else{
+      console.log('campos vacios')
+    }
   };
 
   return (
@@ -200,7 +208,6 @@ export default function SignupScreen({ navigation }) {
         title="Ir a Inicar sesión"
         color="#99681d"
       />
-
     </View>
   );
 }
