@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import { useState } from "react";
 import { StyleSheet, Text, View, Button as RNButton } from "react-native";
 
-import { Button, InputField, ErrorMessage } from "../components";
+import { Button, InputField, ErrorMessage, IconButton } from "../components";
 import Firebase from "../config/firebase";
 import { AuthenticatedUserContext } from "../navigation/AuthenticatedUserProvider";
 
@@ -38,6 +38,14 @@ export default function FootupScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <StatusBar style="dark-content" />
+      <View style={styles.row}>
+        <IconButton
+          name="back"
+          size={24}
+          color="#fff"
+          onPress={() => navigation.goBack()}
+        />
+      </View>
       <Text style={styles.title}>Registrar Restaurante</Text>
       <InputField
         inputStyle={{
@@ -112,11 +120,6 @@ export default function FootupScreen({ navigation }) {
           marginBottom: 24,
         }}
       />
-      <RNButton
-        onPress={() => navigation.navigate("Home")}
-        title="Volver"
-        color="#fd9644"
-      />
     </View>
   );
 }
@@ -124,7 +127,7 @@ export default function FootupScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#c83609",
+    backgroundColor: "#ed9209",
     paddingTop: 50,
     paddingHorizontal: 12,
   },
@@ -134,5 +137,11 @@ const styles = StyleSheet.create({
     color: "#fff",
     alignSelf: "center",
     paddingBottom: 24,
+  },
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    // marginBottom: 24,
   },
 });

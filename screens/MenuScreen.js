@@ -24,7 +24,6 @@ export default function MenuScreen({ navigation }) {
   const [precio, setPrecio] = useState("");
   const [idRestaurante, setIdRestaurante] = useState("");
 
-  console.log(selectedRestaurant);
   const [platillos, setPlatillos] = useState([]);
 
   useEffect(async () => {
@@ -60,51 +59,17 @@ export default function MenuScreen({ navigation }) {
 
   return (
     <ScrollView style={styles.container}>
-      <View></View>
-      {/* <Button
-        onPress={() => navigation.goBack()}
-        backgroundColor="#467fd0"
-        title="Atras"
-        tileColor="#fff"
-        titleSize={20}
-        containerStyle={{
-          marginBottom: 24,
-        }}
-      /> */}
+      <StatusBar style="dark-content" />
+      <View style={styles.row}>
+        <IconButton
+          name="back"
+          size={24}
+          color="#fff"
+          onPress={() => navigation.goBack()}
+        />
+      </View>
 
       <View>
-        {/* <InputField
-          inputStyle={{
-            fontSize: 14,
-          }}
-          containerStyle={{
-            backgroundColor: "#fff",
-            marginBottom: 20,
-          }}
-          // leftIcon="store"
-          placeholder="Nombre de platillo"
-          autoCapitalize="none"
-          autoFocus={true}
-          // value={restaurant}
-          // onChangeText={(text) => setRestaurant(text)}
-        />
-        <InputField
-          inputStyle={{
-            fontSize: 14,
-          }}
-          containerStyle={{
-            backgroundColor: "#fff",
-            marginBottom: 20,
-          }}
-          // leftIcon="store"
-          placeholder="Descripción"
-          autoCapitalize="none"
-          autoFocus={true}
-          // value={restaurant}
-          // onChangeText={(text) => setRestaurant(text)}
-        /> */}
-
-        {/* <StatusBar style="dark-content" /> */}
         <Text style={styles.title}>
           Añadir platillo a menu de: {selectedRestaurant.nombre}
         </Text>
@@ -166,17 +131,6 @@ export default function MenuScreen({ navigation }) {
             marginBottom: 24,
           }}
         />
-
-        {/* <Button
-          onPress={() => navigation.navigate("Foot")}
-          backgroundColor="#467fd0"
-          title="Agregar"
-          tileColor="#fff"
-          titleSize={20}
-          containerStyle={{
-            marginBottom: 24,
-          }}
-        /> */}
       </View>
       <View style={styles.platillosContainer}>
         <View style={{ width: "33%", alignItems: "center" }}>
@@ -225,7 +179,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 24,
+    marginTop: 24,
   },
   title: {
     fontSize: 24,
@@ -233,7 +187,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     alignSelf: "center",
     margin: 16,
-    paddingTop: 20,
+    // paddingTop: 20,
   },
   text: {
     fontSize: 16,

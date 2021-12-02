@@ -44,7 +44,9 @@ export default function HomeScreen({ navigation }) {
   return (
     <ScrollView style={styles.container}>
       <StatusBar style="dark-content" />
+
       <View style={styles.row}>
+        <Text style={styles.title}>Lista de restaurantes</Text>
         <IconButton
           name="logout"
           size={24}
@@ -59,9 +61,6 @@ export default function HomeScreen({ navigation }) {
           title="Agregar restaurante"
           tileColor="#fff"
           titleSize={20}
-          // containerStyle={{
-          //   marginBottom: 24,
-          // }}
         />
       </View>
 

@@ -3,7 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { StyleSheet, Text, View, Button as RNButton } from "react-native";
 
-import { Button, InputField, ErrorMessage } from "../components";
+import { Button, InputField, ErrorMessage, IconButton } from "../components";
 import Firebase from "../config/firebase";
 
 const auth = Firebase.auth();
@@ -26,6 +26,14 @@ export default function addMenuScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <StatusBar style="dark-content" />
+      <View style={styles.row}>
+        <IconButton
+          name="back"
+          size={24}
+          color="#fff"
+          onPress={() => navigation.goBack()}
+        />
+      </View>
       <Text style={styles.title}>Añadir platillo</Text>
 
       <InputField
@@ -107,5 +115,11 @@ const styles = StyleSheet.create({
     color: "#000000",
     alignSelf: "center",
     paddingBottom: 24,
+  },
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 24,
   },
 });
