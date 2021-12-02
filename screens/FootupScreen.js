@@ -38,7 +38,7 @@ export default function FootupScreen({ navigation }) {
           backgroundColor: '#fff',
           marginBottom: 20
         }}
-        leftIcon='email'
+        leftIcon='store'
         placeholder='Nombre del restaurante'
         autoCapitalize='none'
         autoFocus={true}
@@ -53,7 +53,7 @@ export default function FootupScreen({ navigation }) {
           backgroundColor: '#fff',
           marginBottom: 20
         }}
-        leftIcon='lock'
+        leftIcon='map-marker'
         placeholder='Direccion'
         autoCapitalize='none'
         autoCorrect={true}
@@ -69,7 +69,7 @@ export default function FootupScreen({ navigation }) {
           backgroundColor: '#fff',
           marginBottom: 20
         }}
-        leftIcon='lock'
+        leftIcon='file-document'
         placeholder='RFC'
         autoCapitalize='none'
         autoCorrect={true}
@@ -85,7 +85,7 @@ export default function FootupScreen({ navigation }) {
           backgroundColor: '#fff',
           marginBottom: 20
         }}
-        leftIcon='lock'
+        leftIcon='typewriter'
         placeholder='Tipo'
         autoCapitalize='none'
         autoCorrect={true}
@@ -115,7 +115,7 @@ export default function FootupScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#42ba96',
+    backgroundColor: '#c83609',
     paddingTop: 50,
     paddingHorizontal: 12
   },
