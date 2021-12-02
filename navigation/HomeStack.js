@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import HomeScreen from '../screens/HomeScreen';
 import FootupScreen from '../screens/FootupScreen';
+import AddMenuScreen from '../screens/AddMenuScreen';
 
 
 const Stack = createStackNavigator();
@@ -12,6 +13,7 @@ export default function HomeStack() {
     <Stack.Navigator screenOptions={({ route, navigation }) => ({ headerShown: false})}>
       <Stack.Screen name='Home' component={HomeScreen} />
       <Stack.Screen name='Foot' component={FootupScreen} />
+      <Stack.Screen name='AddMenu' component={AddMenuScreen}/>
     </Stack.Navigator>
   );
 }

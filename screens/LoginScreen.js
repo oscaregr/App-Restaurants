@@ -106,6 +106,18 @@ export default function LoginScreen({ navigation }) {
         title="Registrarse"
         color="#99681d"
       />
+
+<Button
+        onPress={() => navigation.navigate("AddMenu")}
+        backgroundColor="#7CA0E7"
+        title="Añadir platillos"
+        tileColor="#fff"
+        titleSize={20}
+        containerStyle={{
+          marginBottom: 24,
+        }}
+      />
+      
     </View>
   );
 }
