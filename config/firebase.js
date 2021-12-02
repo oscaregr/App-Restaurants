@@ -8,7 +8,7 @@ const firebaseConfig = {
     projectId: "fir-activity-a0ada",
     storageBucket: "fir-activity-a0ada.appspot.com",
     messagingSenderId: "662636678820",
-    appId: "1:662636678820:web:61b0f56b0f842378eba031"  
+    appId: "1:662636678820:web:61b0f56b0f842378eba031" 
 }
 
 let Firebase;
@@ -20,6 +20,7 @@ if(firebase.apps.length === 0){
     
 }
 
-const db = firebase.firestore();
-
 export default Firebase;
+export const db = Firebase.firestore();
+
+
