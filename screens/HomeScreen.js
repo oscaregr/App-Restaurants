@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useContext, useEffect, useState } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, Button, ScrollView } from "react-native";
 
 import { IconButton } from "../components";
 import Firebase from "../config/firebase";
@@ -69,7 +69,7 @@ export default function HomeScreen({ navigation }) {
           title={rest.nombre}
         />
       ))}
-    </View>
+    </ScrollView>
   );
 }
 
