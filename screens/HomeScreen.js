@@ -33,8 +33,6 @@ export default function HomeScreen({ navigation }) {
     });
   }, []);
 
-  console.log(restaurants);
-
   const handleSignOut = async () => {
     try {
       await auth.signOut();
@@ -42,9 +40,10 @@ export default function HomeScreen({ navigation }) {
       console.log(error);
     }
   };
+
   return (
-    <View style={styles.container}>
-      <StatusBar style="dark-content" />
+    <ScrollView style={styles.container}>
+      <StatusBar style='dark-content' />
       <View style={styles.row}>
         <IconButton
           name="logout"
@@ -63,15 +62,14 @@ export default function HomeScreen({ navigation }) {
           marginBottom: 24,
         }}
       />
-      <Text style={styles.text}>Tú id de usuario es: {user.uid}</Text>
       {restaurants.map((rest) => (
         <Button
           key={rest.id}
-          onPress={() => console.log(rest)}
+          onPress={() => navigation.navigate("Menu")}
           title={rest.nombre}
         />
       ))}
-    </View>
+    </ScrollView>
   );
 }
 
