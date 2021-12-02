@@ -38,7 +38,7 @@ export default function FootupScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <StatusBar style="dark-content" />
-      <Text style={styles.title}>Rigistrar Restaurante</Text>
+      <Text style={styles.title}>Registrar Restaurante</Text>
       <InputField
         inputStyle={{
           fontSize: 14,
